@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { produce } from "immer";
 
 const numRows = 50;
 const numCols = 50;
@@ -15,14 +16,17 @@ const App: React.FC = () => {
   return (
     <div
       style={{
-        display: 'grid',
+        display: "grid",
         gridTemplateColumns: `repeat(${numCols}, 20px)`
       }}
     >
       {grid.map((rows, i) =>
         rows.map((col, k) => (
           <div
-          key={`${i}-${k}`}
+            key={`${i}-${k}`}
+            onClick={() => {
+
+            }}
             style={{
               width: "20px",
               height: "20px",

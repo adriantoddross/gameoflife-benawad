@@ -14,13 +14,18 @@ const operations = [
   [-1, 0]
 ];
 
-const App: React.FC = () => {
-  const [grid, setGrid] = useState(() => {
-    const rows = [];
+const generateEmptyGrid = () => {
+  const rows = [];
     for (let i = 0; i < numRows; i++) {
       rows.push(Array.from(Array(numCols), () => 0));
     }
     return rows;
+}
+
+
+const App: React.FC = () => {
+  const [grid, setGrid] = useState(() => {
+  return generateEmptyGrid();
   });
 
   const [running, setRunning] = useState(false);
@@ -56,7 +61,7 @@ const App: React.FC = () => {
       });
     });
 
-    setTimeout(runSimulation, 1000);
+    setTimeout(runSimulation, 500);
   }, []);
 
   return (
@@ -73,6 +78,9 @@ const App: React.FC = () => {
         >
           {running ? "Stop" : "Start"}
         </button>
+        <button
+          onClick={() =>setGrid(generateEmptyGrid())}
+        >Clear</button>
       </div>
       <div
         style={{

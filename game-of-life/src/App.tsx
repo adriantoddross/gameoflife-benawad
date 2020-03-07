@@ -81,7 +81,9 @@ const App: React.FC = () => {
           onClick={() => {
             const rows = [];
             for (let i = 0; i < numRows; i++) {
-              rows.push(Array.from(Array(numCols), () => Math.random() > 0.8 ? 1 : 0));
+              rows.push(
+                Array.from(Array(numCols), () => (Math.random() > 0.8 ? 1 : 0))
+              );
             }
             setGrid(rows);
           }}

@@ -60,7 +60,7 @@ const App: React.FC = () => {
       });
     });
 
-    setTimeout(runSimulation, 500);
+    setTimeout(runSimulation, 250);
   }, []);
 
   return (

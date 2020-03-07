@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, RefObject } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { produce } from "immer";
 
 const numRows = 50;

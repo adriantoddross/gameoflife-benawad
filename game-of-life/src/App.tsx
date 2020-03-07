@@ -16,16 +16,15 @@ const operations = [
 
 const generateEmptyGrid = () => {
   const rows = [];
-    for (let i = 0; i < numRows; i++) {
-      rows.push(Array.from(Array(numCols), () => 0));
-    }
-    return rows;
-}
-
+  for (let i = 0; i < numRows; i++) {
+    rows.push(Array.from(Array(numCols), () => 0));
+  }
+  return rows;
+};
 
 const App: React.FC = () => {
   const [grid, setGrid] = useState(() => {
-  return generateEmptyGrid();
+    return generateEmptyGrid();
   });
 
   const [running, setRunning] = useState(false);
@@ -79,8 +78,17 @@ const App: React.FC = () => {
           {running ? "Stop" : "Start"}
         </button>
         <button
-          onClick={() =>setGrid(generateEmptyGrid())}
-        >Clear</button>
+          onClick={() => {
+            const rows = [];
+            for (let i = 0; i < numRows; i++) {
+              rows.push(Array.from(Array(numCols), () => Math.random() > 0.8 ? 1 : 0));
+            }
+            setGrid(rows);
+          }}
+        >
+          Randomize
+        </button>
+        <button onClick={() => setGrid(generateEmptyGrid())}>Clear</button>
       </div>
       <div
         style={{

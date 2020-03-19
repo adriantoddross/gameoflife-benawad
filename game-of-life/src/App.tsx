@@ -70,6 +70,15 @@ const App: React.FC = () => {
           onClick={() => {
             setRunning(!running);
             if (!running) {
+              const rows = [];
+              for (let i = 0; i < numRows; i++) {
+                rows.push(
+                  Array.from(Array(numCols), () =>
+                    Math.random() > 0.8 ? 1 : 0
+                  )
+                );
+              }
+              setGrid(rows);
               runningRef.current = true;
               runSimulation();
             }
@@ -77,7 +86,8 @@ const App: React.FC = () => {
         >
           {running ? "Stop" : "Start"}
         </button>
-        <button
+        {/* <button
+        disabled={!running}
           onClick={() => {
             const rows = [];
             for (let i = 0; i < numRows; i++) {
@@ -89,30 +99,33 @@ const App: React.FC = () => {
           }}
         >
           Randomize
+        </button> */}
+        <button disabled={running} onClick={() => setGrid(generateEmptyGrid())}>
+          Clear
         </button>
-        <button onClick={() => setGrid(generateEmptyGrid())}>Clear</button>
       </div>
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: `repeat(${numCols}, 20px)`
+          gridTemplateColumns: `repeat(${numCols}, 1.9vmin)`,
+          gridTemplateRows: `repeat(${numRows}, 1.9vmin)`
         }}
       >
         {grid.map((rows, i) =>
           rows.map((col, k) => (
             <div
               key={`${i}-${k}`}
-              onClick={() => {
-                const newGrid = produce(grid, gridCopy => {
-                  gridCopy[i][k] = grid[i][k] ? 0 : 1;
-                });
-                setGrid(newGrid);
-              }}
+              // onClick={() => {
+              //   const newGrid = produce(grid, gridCopy => {
+              //     gridCopy[i][k] = grid[i][k] ? 0 : 1;
+              //   });
+              //   setGrid(newGrid);
+              // }}
               style={{
-                width: "20px",
-                height: "20px",
+                width: "1.9vmin",
+                height: "1.9vmin",
                 backgroundColor: grid[i][k] ? "pink" : undefined,
-                border: "1px solid black"
+                border: "0.5px solid gray"
               }}
             />
           ))
